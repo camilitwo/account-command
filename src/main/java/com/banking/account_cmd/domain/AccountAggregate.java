@@ -6,11 +6,16 @@ import com.banking.account_command.events.AccountOpenedEvent;
 import com.banking.account_command.events.FundsDepositedEvent;
 import com.banking.account_command.events.FundsWithdrawnEvent;
 import com.banking.cqrs_core.domain.AggregateRoot;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @NoArgsConstructor
+@Getter
+@Setter
 public class AccountAggregate extends AggregateRoot {
     private Boolean active;
     private double balance;
@@ -50,7 +55,7 @@ public class AccountAggregate extends AggregateRoot {
         }
         raiseEvent(FundsWithdrawnEvent.builder()
                 .id(this.id)
-                .amount(-amount)
+                .amount(amount)
                 .build());
     }
 
